@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Finance",
+  title: "tatu-project",
   description: "Gerencie suas finanças de forma simples e prática",
   icons: {
     icon: "/favicon.ico",

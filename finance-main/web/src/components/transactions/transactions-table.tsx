@@ -1,14 +1,12 @@
 import * as lucide from "lucide-react";
 import transactions from "../../assets/transactions.json" with { type: "json" };
-import React, { useEffect } from "react";
+import React from "react";
+
 
 type Transaction = typeof transactions[0];
 
 export function TransactionTable() {
-
-  useEffect(() => {
-    import("lucide-react").then((mod) => console.log(mod));
-  })
+  const hasScroll = transactions.length > 1; 
 
   return (
     <div
@@ -20,105 +18,109 @@ export function TransactionTable() {
         height: "100%",
       }}
     >
-      <h3>Transactions</h3>
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "1rem",
-        width: "100%",
-        overflowY: "auto",
-        height: "100%",
-      }}>
-        <table style={{
-          borderCollapse: "collapse",
-        }}>
+      <h3 style={{ color: "#fff", fontSize: "1.5rem", fontWeight: "bold" }}> 
+      Transações</h3>
+      <div
+        className="scrollHidden"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "1rem",
+          width: "100%",
+          overflowY: hasScroll ? "auto" : "hidden",
+          height: "300px", 
+          
+          
+        }}
+      >
+        <table
+          style={{
+            borderCollapse: "separate",
+            width: "100%",
+            
+          }}
+        >
           <thead>
-            <tr>
-              <th></th>
-              <th style={{ textAlign: "start", color: "#666", fontWeight: "normal" }}>Descrição</th>
-              <th style={{ textAlign: "start", color: "#666", fontWeight: "normal" }}>Tipo</th>
-              <th style={{ textAlign: "start", color: "#666", fontWeight: "normal" }}>Valor</th>
-              <th style={{ textAlign: "start", color: "#666", fontWeight: "normal" }}>Banco</th>
-              <th style={{ textAlign: "start", color: "#666", fontWeight: "normal" }}>Data</th>
+            <tr
+              style={{
+                textAlign: "center",
+                  color: "#666",
+                  fontWeight: "bold",
+                  padding: "0.5rem",
+                  position: "sticky", 
+                  top: 0, 
+                  backgroundColor: "#27272A", 
+                  zIndex: 1, 
+              }}>
+              <th>
+                Icone
+              </th>
+              <th>
+                Descrição
+              </th>
+              <th>
+                Tipo
+              </th>
+              <th>
+                Valor
+              </th>
+              <th>
+                Banco
+              </th>
+              <th>
+                Data
+              </th>
             </tr>
           </thead>
           <tbody>
             {transactions.map((transaction: Transaction) => (
-              (
-                <tr key={transaction.id} style={{
-                  backgroundColor: "#f0f0f0",
+              <tr
+                key={transaction.id}
+                style={{
+                  
                   borderRadius: "8px",
                   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  color: "#fff",
+                  textAlign: "center",
+                  
                   padding: "0.5rem",
-                }}>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {/* {
-                      import("lucide-react").then((mod) => {
-                        const Icon = mod[transaction.category.icon] as LucideIcon;
-                        return <Icon/>
-                      })
-                    } */}
-
-                    {transaction.category.icon in lucide
-                      ? React.createElement(lucide[transaction.category.icon as keyof typeof lucide] as React.ElementType)
-                      : null}
-
-                  </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {transaction.description}
-                  </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {transaction.type === "income" ? "Entrada" : "Saída"}
-                  </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {transaction.amount.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
-                  </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {transaction.bank}
-                  </td>
-                  <td style={{
-                    textAlign: "start",
-                    fontWeight: "normal",
-                    padding: "0.5rem",
-
-                  }}>
-                    {new Date(transaction.date).toLocaleString("pt-BR")}
-                  </td>
-                </tr>
-              )
+                  
+                }}
+              >
+                <td>
+                  {transaction.category.icon in lucide
+                    ? React.createElement(
+                        lucide[transaction.category.icon as keyof typeof lucide] as React.ElementType
+                      )
+                    : null}
+                </td>
+                <td>
+                  {transaction.description}
+                </td>
+                <td>
+                  {transaction.type === "income" ? "Entrada" : "Saída"}
+                </td>
+                <td
+                  style={{
+                    color: transaction.type === "income" ? "#4ADE80" : "#EF4444", // Verde para entrada, vermelho para saída
+                  }}
+                >
+                  {transaction.amount.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </td>
+                <td>
+                  {transaction.bank}
+                </td>
+                <td>
+                  {new Date(transaction.date).toLocaleString("pt-BR")}
+                </td>
+              </tr>
             ))}
-
           </tbody>
         </table>
       </div>
     </div>
-  )
+  );
 }

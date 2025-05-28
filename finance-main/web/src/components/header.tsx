@@ -15,7 +15,13 @@ export function Header() {
       height={40}
       alt="Picture of the author"
     />
-      <button>
+      <button style={{
+        color: "#000000",
+        backgroundColor: "#10B981",
+        border: "none",
+        borderRadius: "100px",
+        
+      }}>
         <CirclePlus />
       </button>
     </header>

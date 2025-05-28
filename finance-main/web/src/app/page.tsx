@@ -1,8 +1,8 @@
 "use client"
 
-import { CardSummary } from "@/components/card-summary";
-import { Category } from "@/components/category";
-import { ChartAnalyze } from "@/components/chart-analyze";
+import { CardSummary } from "@/components/cardsumary/card-summary";
+import { Category } from "@/components/category/category";
+import { ChartAnalyze } from "@/components/charts/chart-analyze";
 import { Header } from "@/components/header";
 import { TransactionTable } from "@/components/transactions/transactions-table";
 import { Banknote, BanknoteArrowDown, BanknoteArrowUp, Car, CircleEllipsis, Hamburger, Pill, TreePalm } from "lucide-react";
@@ -14,7 +14,7 @@ const categories = [
     icon: Hamburger,
     name: "Alimentação",
     quantity: 10,
-    amount: 100,
+    amount: 50,
   },
   {
     id: "2",
@@ -101,9 +101,14 @@ export default function Home() {
       flexDirection: "row",
       gap: "1rem",
       width: "100%",
+      alignItems: "flex-start", // garante alinhamento ao topo
     }}>
-      <ChartAnalyze/>
-      <Category categories={categories}/>
+      <div style={{ flex: 4 }}>
+        <ChartAnalyze/>
+      </div>
+      <div style={{ flex: 1 }}>
+        <Category categories={categories}/>
+      </div>
     </section>
 
     <section style={{

@@ -73,7 +73,8 @@
     /* color-scheme: light dark; */
   }
   body {
-    background-color: var(--background);
+    /* Gradiente de cinza para roxo */
+    background: #77a0ec2a; /* cinza escuro, ou #e5e5e5 para cinza claro */
     color: var(--foreground);
     font-family: var(--font-poppins), sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -94,5 +95,25 @@
   p {
     margin-top: 0;
     margin-bottom: 0;
+  }
+
+  .number-align {
+    font-variant-numeric: tabular-nums;
+    min-width: 32px;
+    text-align: center;
+  }
+
+  .amount-align {
+    font-variant-numeric: tabular-nums;
+    min-width: 48px;
+    text-align: right;
+  }
+
+  .scrollHidden {
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE e Edge */
+  }
+  .scrollHidden::-webkit-scrollbar {
+    display: none;              /* Chrome, Safari e Opera */
   }
 }
